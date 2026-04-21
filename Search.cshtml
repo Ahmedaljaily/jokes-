@@ -1,0 +1,24 @@
+﻿@model List<Jokes>
+
+<h2>Search Jokes</h2>
+
+<form method="post">
+    <input type="text" name="searchString" placeholder="Search jokes..." />
+    <button type="submit">Search</button>
+</form>
+
+<br />
+
+@if (Model == null || !Model.Any())
+{
+    <p>No jokes found.</p>
+}
+else
+{
+    <ul>
+        @foreach (var joke in Model)
+        {
+            <li>@joke.JokeAnswer</li>
+        }
+    </ul>
+}

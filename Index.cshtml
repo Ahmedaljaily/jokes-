@@ -1,8 +1,61 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model IEnumerable<ToDayJokesWebApp.Models.Jokes>
+
+@{
+    ViewData["Title"] = "Index";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome To ASP.NET CORE</h1>
-    <p>building ULK Jokes Web apps with ASP.NET Core Application MVC.</p>
-</div>
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.JokeQuestion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.JokeAnswer)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.JokeQuestion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.JokeAnswer)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+                <td>
+                    @item.Likes 👍
+                </td>
+
+                <td>
+                    <form asp-action="Like" method="post">
+                        <input type="hidden" name="id" value="@item.Id" />
+                        <button type="submit">👍 Like</button>
+                    </form>
+                </td>
+                <td>
+                    @item.Likes 👍
+                </td>
+
+                <td>
+                    <form asp-action="Like" method="post">
+                        <input type="hidden" name="id" value="@item.Id" />
+                        <button type="submit">👍 Like</button>
+                    </form>
+                </td>
+        </tr>
+}
+    </tbody>
+</table>
